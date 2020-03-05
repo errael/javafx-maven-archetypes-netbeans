@@ -2,20 +2,21 @@
 
 set -e
 
-if [ -z "$JDK8" ] || ! [ -f "$JDK8/bin/java" ]; then
+if [[ -z "$JDK8"  || ! -f "$JDK8/bin/java" && ! -f "$JDK8/bin/java.exe" ]]; then
   echo Specify JDK8 property to point to JDK 8 installation: $JDK8
   exit 1
 fi
 
-if [ -z "$JDK11" ] || ! [ -f "$JDK11/bin/java" ]; then
+if [[ -z "$JDK11"  || ! -f "$JDK11/bin/java" && ! -f "$JDK11/bin/java.exe" ]]; then
   echo Specify JDK11 property to point to JDK 11 installation: $JDK11
   exit 2
 fi
 
 ARCH_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
 
+: ${MAVEN_REPO:=$HOME/.m2/repository}
 echo "Removing local catalog for javafx archetypes version: $ARCH_VERSION"
-rm -rf $HOME/.m2/repository/org/openjfx/*archetype*/$ARCH_VERSION
+rm -rf $MAVEN_REPO/com/raelity/jfx/*archetype*/$ARCH_VERSION
 
 echo "Installing local catalog for javafx archetypes version: $ARCH_VERSION"
 JAVA_HOME=$JDK8 mvn -q install
@@ -38,14 +39,19 @@ function generate() {
     mvn -q archetype:generate \
         -DarchetypeCatalog=local \
         -DinteractiveMode=false \
-        -DarchetypeGroupId=org.openjfx \
+        -DarchetypeGroupId=com.raelity.jfx \
         -DarchetypeArtifactId=$1 \
         -DarchetypeVersion=$ARCH_VERSION \
-        -DgroupId=org.openjfx.demo \
+        -DgroupId=com.raelity.jfx.demo \
         -DartifactId=test-$1 \
         -Dversion=1.0-SNAPSHOT \
         -Djavafx-version=$2
-    setupExit test-$1/src/main/java/org/openjfx/demo/App.java
+    setupExit test-$1/src/main/java/com/raelity/jfx/demo/App.java
+
+    if [[ ! -f test-$1/nbactions.xml ]]; then
+        echo File $2/test-$1/nbactions.xml does not exist
+        exit 3
+    fi
 
     if [ $2 != 11 ]; then
       echo "  Launching on JDK8"
@@ -60,9 +66,9 @@ function generate() {
     cd ..
 }
 
-generate javafx-archetype-simple 1.8
-generate javafx-archetype-simple 8
-generate javafx-archetype-simple 11
-generate javafx-archetype-fxml 1.8
-generate javafx-archetype-fxml 8
-generate javafx-archetype-fxml 11
+generate javafx-archetype-simple-netbeans 1.8
+generate javafx-archetype-simple-netbeans 8
+generate javafx-archetype-simple-netbeans 11
+generate javafx-archetype-fxml-netbeans 1.8
+generate javafx-archetype-fxml-netbeans 8
+generate javafx-archetype-fxml-netbeans 11
