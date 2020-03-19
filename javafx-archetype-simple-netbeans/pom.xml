@@ -7,6 +7,6 @@
     <parent>
         <groupId>com.raelity.jfx</groupId>
         <artifactId>javafx-maven-archetypes-netbeans</artifactId>
-        <version>0.0.1</version>
+        <version>0.0.2-SNAPSHOT</version>
     </parent>
 </project>
