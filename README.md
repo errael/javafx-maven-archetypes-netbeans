@@ -21,7 +21,7 @@ To install all the archetypes in your local repository execute the following com
 
 ```
 git clone https://github.com/errael/javafx-maven-archetypes-netbeans.git
-cd javafx-maven-archetypes
+cd javafx-maven-archetypes-netbeans
 mvn clean install
 ```
 

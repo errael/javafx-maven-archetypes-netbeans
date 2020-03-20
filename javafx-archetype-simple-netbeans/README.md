@@ -15,7 +15,7 @@ Once you have installed the archetype locally, you can use it to create a new pr
 mvn archetype:generate \
         -DarchetypeGroupId=com.raelity.jfx \
         -DarchetypeArtifactId=javafx-archetype-simple-netbeans \
-        -DarchetypeVersion=0.0.2-SNAPSHOT \
+        -DarchetypeVersion=0.0.2 \
         -DgroupId=groupid \
         -DartifactId=artifactId \
         -Dversion=version
@@ -34,7 +34,7 @@ For example:
 mvn archetype:generate \
         -DarchetypeGroupId=com.raelity.jfx \
         -DarchetypeArtifactId=javafx-archetype-fxml-netbeans \
-        -DarchetypeVersion=0.0.2-SNAPSHOT \
+        -DarchetypeVersion=0.0.2 \
         -DgroupId=groupid \
         -DartifactId=artifactId \
         -Dversion=version
