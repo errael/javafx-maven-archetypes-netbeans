@@ -21,7 +21,7 @@
             <actionName>debug</actionName>
             <goals>
                 <goal>clean</goal>
-                <goal>javafx:run@debug</goal>
+                <goal>javafx:run@ide-debug</goal>
             </goals>
             <properties>
                 <jpda.listen>true</jpda.listen>
