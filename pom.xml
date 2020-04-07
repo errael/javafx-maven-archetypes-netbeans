@@ -3,7 +3,10 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.raelity.jfx</groupId>
     <artifactId>javafx-maven-archetypes-netbeans</artifactId>
-    <version>0.0.4-SNAPSHOT</version>
+    <version>0.0.4</version>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
     <packaging>pom</packaging>
     <name>Maven Archetypes for JavaFX with NetBeans</name>
     <description>Maven archetypes for creating different types of JavaFX application with NetBeans.</description>
